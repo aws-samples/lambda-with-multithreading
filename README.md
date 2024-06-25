@@ -1,15 +1,43 @@
-## My Project
+## Implementing parallel data processing within AWS Lambda execution environment
 
-TODO: Fill this README out!
+This sample project illustrates parallelization techniques described in [this blog](link). 
 
-Be sure to:
+Programming languages offer diverse techniques and terminology for parallel processing. Java employs multi-threading and thread pools. Node.js, though single-threaded, provides event loop and promises (for async programming), as well as worker threads (for actual multi-threading). Python supports both multi-threading (subject to Global Interpreter Lock) and multi-processing. Concurrent routines are another technique gaining attention in the industry.
 
-* Change the title in this README
-* Edit your repository description on GitHub
+This sample is provided for illustration purposes only and uses a language-agnostic term “worker” to denote a unit of parallel processing. Your specific parallelization implementation depends on your choice of runtime language and frameworks. We highly recommend you use battle-tested frameworks like [Powertools for AWS Lambda](https://docs.powertools.aws.dev/lambda/python/latest/) that implement [batch processing parallelization](https://docs.powertools.aws.dev/lambda/python/latest/utilities/batch/#processing-messages-asynchronously) when possible. Regardless of the programming language, it is crucial to ensure all background threads/workers/promises/routines/tasks spawned by the function handler are completed within the same invocation before the handler returns.
 
-## Security
+### Requirements
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+* [Create an AWS account](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) if you do not already have one and log in. The IAM user that you use must have sufficient permissions to make necessary AWS service calls and manage AWS resources.
+* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) installed and configured
+* [Git Installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [AWS Cloud Development Kit](https://aws.amazon.com/cdk/) (AWS CDK) installed
+
+## Deployment Instructions
+
+1. Create a new directory, navigate to that directory in a terminal and clone the GitHub repository:
+    ``` 
+    git clone https://github.com/aws-samples/lambda-with-multithreading
+    ```
+1. Change directory to the pattern directory:
+    ```
+    cd lambda-with-multithreading
+    ```
+2. From the command line, use AWS CDK to deploy the AWS resources for the pattern:
+    ```
+    cdk deploy
+    ```
+3. Wait for CDK to complete the deployment.
+
+> Resources created as part of this sample deployment can have associated costs. 
+
+## Cleanup
+ 
+Delete the stack
+
+```bash
+cdk destroy
+```
 
 ## License
 
